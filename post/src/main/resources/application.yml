@@ -3,7 +3,10 @@ server:
   servlet:
     context-path: /
 spring:
-  
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
       
      
   datasource:
