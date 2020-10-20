@@ -1,11 +1,17 @@
 package com.cos.post.domain.user;
 
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.cos.post.domain.post.Post;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,5 +34,10 @@ public class User {
 	private String email;
 	private String role; //권한용
 	
+	
+	@JsonIgnoreProperties({"user"})//현재 무한루프상태이므로 이렇게 무시하고싶은 변수명을 적어준다
+	//아래와 같이 선언함으로서 자신이 연관관계의 주인이 아님을 알림.테이블에 해당컬럼을 안만든다.
+	@OneToMany(mappedBy = "user")//Post오브젝트(Many쪽 변수)의 user변수 넣어줌
+	private List<Post> posts;
 
 }
